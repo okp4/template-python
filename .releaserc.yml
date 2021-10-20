@@ -34,5 +34,6 @@ plugins:
     - assets:
       - CHANGELOG.md
       - LICENSE
-      - src/
-      message: "chore(release): perform release ${nextRelease.version}\n\n${nextRelease.notes}"
+      - my_app/__init__.py
+      - pyproject.toml
+      message: "chore(release): perform release ${nextRelease.version}"
