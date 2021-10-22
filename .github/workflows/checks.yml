@@ -20,7 +20,27 @@ jobs:
       - name: Check commits
         uses: wagoid/commitlint-github-action@v4
 
+  poetry-file-is-valid:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install Python Poetry
+        uses: abatilo/actions-poetry@v2.1.4
+        with:
+          poetry-version: 1.1.11
+
+      - name: Lint code (flake8)
+        run: |
+          poetry check
+
   code-style-is-complant:
+    needs: poetry-file-is-valid
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
@@ -44,6 +64,7 @@ jobs:
           poetry run flake8 --count --show-source --statistics
 
   test-are-passing:
+    needs: poetry-file-is-valid
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
@@ -57,11 +78,11 @@ jobs:
         uses: abatilo/actions-poetry@v2.1.4
         with:
           poetry-version: 1.1.11
-
+  
       - name: Install project dependencies
         run: |
           poetry install
 
       - name: Run unit tests (unittest)
         run: |
-          poetry run flake8 --count --show-source --statistics
+          poetry run python -m unittest discover
