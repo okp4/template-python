@@ -22,6 +22,9 @@ upload_to_pypi = false
 upload_to_release = true
 build_command = "pip install poetry && poetry build"
 
+[tool.poetry.scripts]
+my-app = "my_app.main:main"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
