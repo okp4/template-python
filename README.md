@@ -10,7 +10,7 @@ This repository holds the template for building python projects with a consisten
 
 This way, the template promotes:
 
-- the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versionning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.).
+- the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versionning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.)
 - a uniform way for managing the project lifecycle (depencencies management, building, testing)
 - KISS principles: simple for developers
 - a consistent coding style
@@ -67,7 +67,7 @@ poetry install
 
 Code linting is performed by [flake8](https://flake8.pycqa.org).
 
-> ⚠️ Be sure to write compliant with `flake8` rules or else you'll be rejected by the CI.
+> ⚠️ Be sure to write code compliant with `flake8` rules or else you'll be rejected by the CI.
 
 ```sh
 poetry run flake8 --count --show-source --statistics
