@@ -18,17 +18,16 @@ ENV \
     POETRY_CACHE_DIR='/var/cache/pypoetry' \
     PATH="$PATH:/root/.poetry/bin"
 
-RUN  apt-get update && apt-get upgrade -y \
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN  apt-get update \
   && apt-get install --no-install-recommends -y \
-    bash \
-    build-essential \
-    curl \
-    gettext \
-    git \
-    libpq-dev \
+    build-essential=12.6 \
+    curl=7.64.0-4+deb10u2 \
   && curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-  && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+  && apt-get clean -y  \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV PATH="${PATH}:/root/.poetry/bin"
 
@@ -47,7 +46,7 @@ FROM python:3.9.7-slim-buster
 
 COPY --from=builder /build/dist/*.whl /tmp/whl/
 
-RUN  python3 -m pip install /tmp/whl/*.whl \
+RUN  python3 -m pip install --no-cache-dir /tmp/whl/*.whl \
   && rm -rf /tmp/whl
 
 ENTRYPOINT ["my-app"]
