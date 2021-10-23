@@ -2,9 +2,9 @@ name: Checks
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
   workflow_dispatch:
 
@@ -59,7 +59,7 @@ jobs:
         run: |
           poetry install
 
-      - name: Lint code (flake8)
+      - name: Lint code
         run: |
           poetry run flake8 --count --show-source --statistics
 
@@ -112,8 +112,21 @@ jobs:
         run: |
           poetry build
 
-  docker-builds:
-    needs: poetry-file-is-valid
+  dockerfile-follows-best-practices:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Setup environment
+        run: |
+          docker pull hadolint/hadolint:v2.7.0-alpine
+
+      - name: Lint dockerfile
+        run: |
+          docker run --rm -i hadolint/hadolint < Dockerfile
+
+  docker-image-builds:
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
