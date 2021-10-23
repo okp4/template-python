@@ -38,6 +38,12 @@ The repository uses [Poetry](https://python-poetry.org) as python packaging and 
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
 
+### Docker
+
+You can follow the link below on how to install and configure **Docker** on your local machine:
+
+- [Docker Install Documentation](https://docs.docker.com/install/)
+
 ## What's included
 
 This template provides the following:
@@ -81,6 +87,20 @@ Unit tests are performed by the [unittest](https://docs.python.org) testing fram
 
 ```sh
 poetry run python -m unittest discover
+```
+
+### Build & run docker image (locally)
+
+Build a local docker image using the following command line:
+
+```sh
+docker build -t my-app .
+```
+
+Once built, you can run the container locally with the following command line:
+
+```sh
+docker run -ti --rm my-app
 ```
 
 ## Contributing
