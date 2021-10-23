@@ -35,7 +35,7 @@ jobs:
         with:
           poetry-version: 1.1.11
 
-      - name: Lint code (flake8)
+      - name: Check poetry config is valid
         run: |
           poetry check
 
@@ -108,6 +108,6 @@ jobs:
         run: |
           poetry install
 
-      - name: Run unit tests (unittest)
+      - name: Build project
         run: |
           poetry build
