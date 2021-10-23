@@ -111,3 +111,14 @@ jobs:
       - name: Build project
         run: |
           poetry build
+
+  docker-builds:
+    needs: poetry-file-is-valid
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Build docker image
+        run: |
+          docker build .
