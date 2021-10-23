@@ -10,7 +10,7 @@ jobs:
       - name: Check that main branch builds
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: Checks
+          workflow: Build
           token: ${{ secrets.OKP4_TOKEN }}
 
       - name: Check out repository

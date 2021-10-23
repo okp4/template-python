@@ -1,4 +1,4 @@
-name: Checks
+name: Lint
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  commits-are-conventional:
+  lint-commits:
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
@@ -20,7 +20,7 @@ jobs:
       - name: Check commits
         uses: wagoid/commitlint-github-action@v4
 
-  poetry-file-is-valid:
+  lint-poetry:
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
@@ -39,8 +39,8 @@ jobs:
         run: |
           poetry check
 
-  code-style-is-complant:
-    needs: poetry-file-is-valid
+  lint-python-code:
+    needs: lint-poetry
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
@@ -63,56 +63,7 @@ jobs:
         run: |
           poetry run flake8 --count --show-source --statistics
 
-  test-are-passing:
-    needs: poetry-file-is-valid
-    timeout-minutes: 30
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
-      - name: Install Python Poetry
-        uses: abatilo/actions-poetry@v2.1.4
-        with:
-          poetry-version: 1.1.11
-
-      - name: Install project dependencies
-        run: |
-          poetry install
-
-      - name: Run unit tests (unittest)
-        run: |
-          poetry run python -m unittest discover
-
-  project-builds:
-    needs: poetry-file-is-valid
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
-      - name: Install Python Poetry
-        uses: abatilo/actions-poetry@v2.1.4
-        with:
-          poetry-version: 1.1.11
-
-      - name: Install project dependencies
-        run: |
-          poetry install
-
-      - name: Build project
-        run: |
-          poetry build
-
-  dockerfile-follows-best-practices:
+  lint-dockerfile:
     runs-on: ubuntu-20.04
     steps:
       - name: Check out repository
@@ -126,12 +77,3 @@ jobs:
         run: |
           docker run --rm -i hadolint/hadolint < Dockerfile
 
-  docker-image-builds:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-
-      - name: Build docker image
-        run: |
-          docker build .
