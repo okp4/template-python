@@ -98,4 +98,3 @@ jobs:
 
       - name: Lint yaml files
         uses: ibiqlik/action-yamllint@v3.1.0
-

@@ -9,29 +9,29 @@ plugins:
       changelogTitle: "# Template python Changelog"
   - - '@google/semantic-release-replace-plugin'
     - replacements:
-      - files: [pyproject.toml]
-        from: ^version = ".+"
-        to: version = "${nextRelease.version}"
-        countMatches: true
-        results:
-        - file: pyproject.toml
-          hasChanged: true
-          numMatches: 1
-          numReplacements: 1
-      - files: [my_app/__init__.py]
-        from: ^__version__ = '.+'
-        to: __version__ = '${nextRelease.version}'
-        countMatches: true
-        results:
-        - file: my_app/__init__.py
-          hasChanged: true
-          numMatches: 1
-          numReplacements: 1
+        - files: [ pyproject.toml ]
+          from: ^version = ".+"
+          to: version = "${nextRelease.version}"
+          countMatches: true
+          results:
+            - file: pyproject.toml
+              hasChanged: true
+              numMatches: 1
+              numReplacements: 1
+        - files: [ my_app/__init__.py ]
+          from: ^__version__ = '.+'
+          to: __version__ = '${nextRelease.version}'
+          countMatches: true
+          results:
+            - file: my_app/__init__.py
+              hasChanged: true
+              numMatches: 1
+              numReplacements: 1
   - "@semantic-release/github"
   - - "@semantic-release/git"
     - assets:
-      - CHANGELOG.md
-      - LICENSE
-      - my_app/__init__.py
-      - pyproject.toml
+        - CHANGELOG.md
+        - LICENSE
+        - my_app/__init__.py
+        - pyproject.toml
       message: "chore(release): perform release ${nextRelease.version}"
