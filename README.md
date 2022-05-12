@@ -49,7 +49,8 @@ You can follow the link below on how to install and configure **Docker** on your
 This template provides the following:
 
 - [poetry](https://python-poetry.org) for dependency management.
-- [flake8](https://flake8.pycqa.org) for linting.
+- [flake8](https://flake8.pycqa.org) for linting python code.
+- [mypy](http://mypy-lang.org/) for static type checks.
 - [unittest](https://docs.python.org) for unit testing.
 
 The project is also configured to enforce code quality by declaring some CI workflows:
@@ -71,19 +72,25 @@ poetry install
 
 ### Lint
 
-Code linting is performed by [flake8](https://flake8.pycqa.org).
+> ⚠️ Be sure to write code compliant with linters or else you'll be rejected by the CI.
 
-> ⚠️ Be sure to write code compliant with `flake8` rules or else you'll be rejected by the CI.
+**Code linting** is performed by [flake8](https://flake8.pycqa.org).
 
 ```sh
 poetry run flake8 --count --show-source --statistics
 ```
 
+**Static type check** is performed by [mypy](http://mypy-lang.org/).
+
+```sh
+poetry run mypy .
+```
+
 ### Unit Test
 
-Unit tests are performed by the [unittest](https://docs.python.org) testing framework.
-
 > ⚠️ Be sure to write tests that succeed or else you'll be rejected by the CI.
+
+Unit tests are performed by the [unittest](https://docs.python.org) testing framework.
 
 ```sh
 poetry run python -m unittest discover
