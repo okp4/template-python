@@ -4,9 +4,13 @@ on:
   push:
     branches: [ main ]
     tags: [ 'v*' ]
+
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   publish-docker-images:
@@ -15,8 +19,52 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Install environment
-        uses: actions/setup-python@v3
+      - name: Set up context
+        id: project_context
+        uses: FranzDiebold/github-env-vars-action@v2.3.1
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: docker_metadata
+        uses: docker/metadata-action@v3
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=raw,enable=${{ !endsWith(github.ref, github.event.repository.default_branch) }},value=${{ env.CI_ACTION_REF_NAME_SLUG }}
+            type=raw,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},value=nightly
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+          labels: |
+            org.opencontainers.image.vendor=OKP4
+
+      - name: Login to Docker registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.DOCKER_REGISTRY_ID }}
+          password: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
+
+      - name: Build and publish image(s)
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.docker_metadata.outputs.tags }}
+          labels: ${{ steps.docker_metadata.outputs.labels }}
+
+  publish-pypi:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up context
+        id: project_context
+        uses: FranzDiebold/github-env-vars-action@v2.3.1
+
+      - uses: actions/setup-python@v3
         with:
           python-version: 3.9
 
@@ -25,39 +73,10 @@ jobs:
         with:
           poetry-version: 1.1.11
 
-      - name: Login to Docker registry
+      - name: Publish package
+        working-directory: ${{env.WORK_DIR}}
         run: |
-          echo ${{ secrets.DOCKER_REGISTRY_TOKEN }} | docker login ghcr.io -u ${{ secrets.DOCKER_REGISTRY_ID }} --password-stdin
-
-      - name: Set up target version
-        id: project_context
-        run: |
-          version=`poetry version -s --no-ansi -n`
-          echo "::set-output name=version::$version"
-          echo "::set-output name=major=$(echo $version | cut -d. -f1)"
-          echo "::set-output name=minor=$(echo $version | cut -d. -f2)"
-          echo "::set-output name=revision=$(echo $version | cut -d. -f3)"
-          echo "::set-output name=image::$GITHUB_REPOSITORY"
-
-      - name: Build and publish image(s)
-        run: |
-          if [[ $GITHUB_REF == refs/tags/v* ]]; then
-            echo "Publish docker image for branch"
-            docker build \
-              -t ghcr.io/${{ steps.project_context.outputs.image }}:${{ steps.project_context.outputs.major }} \
-              -t ghcr.io/${{ steps.project_context.outputs.image }}:${{ steps.project_context.outputs.major }}.${{ steps.project_context.outputs.minor }} \
-              -t ghcr.io/${{ steps.project_context.outputs.image }}:${{ steps.project_context.outputs.version }} \
-              -t ghcr.io/${{ steps.project_context.outputs.image }}:latest \
-              .
-          elif [[ $GITHUB_EVENT_NAME == pull_request ]]; then
-            echo "Publish docker image for branch"
-            docker build \
-              -t ghcr.io/${{ steps.project_context.outputs.image }}:branch \
-              .
-          else
-            echo "Publish docker image for nightly"
-            docker build \
-              -t ghcr.io/${{ steps.project_context.outputs.image }}:nightly \
-              .
-          fi
-          docker push ghcr.io/${{ steps.project_context.outputs.image }} --all-tags
+          poetry install
+          poetry build
+          echo "🚀 Publishing pypi package"
+          poetry publish  -u __token__ -p "${{ secrets.PYPI_API_TOKEN }}"

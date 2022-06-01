@@ -1,12 +1,17 @@
 name: Lint
 
 on:
+  workflow_call:
+
   push:
     branches: [ main ]
+
   pull_request:
     branches: [ main ]
 
-  workflow_dispatch:
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint-commits:
@@ -39,7 +44,7 @@ jobs:
         run: |
           poetry check
 
-  lint-python-code:
+  lint-python:
     needs: lint-poetry
     runs-on: ubuntu-20.04
     steps:
@@ -59,7 +64,7 @@ jobs:
         run: |
           poetry install
 
-      - name: Lint code (flake8)
+      - name: Lint python code (flake8)
         run: |
           poetry run flake8 --count --show-source --statistics
 
