@@ -4,15 +4,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  lint:
+    if: github.ref == 'refs/heads/main' && github.actor == 'bot-anik'
+    uses: ./.github/workflows/lint.yml
+
+  build:
+    if: github.ref == 'refs/heads/main' && github.actor == 'bot-anik'
+    uses: ./.github/workflows/build.yml
+
+  test:
+    if: github.ref == 'refs/heads/main' && github.actor == 'bot-anik'
+    uses: ./.github/workflows/test.yml
+
   perfom-release:
+    if: github.ref == 'refs/heads/main' && github.actor == 'bot-anik'
+    needs:
+      - lint
+      - build
+      - test
     runs-on: ubuntu-20.04
     steps:
-      - name: Check that main branch builds
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: Build
-          token: ${{ secrets.OKP4_TOKEN }}
-
       - name: Check out repository
         uses: actions/checkout@v3
         with:
@@ -30,7 +41,6 @@ jobs:
           branch: main
           extra_plugins: |
             @semantic-release/changelog
-            @semantic-release/exec
             @semantic-release/git
             @google/semantic-release-replace-plugin
         env:
