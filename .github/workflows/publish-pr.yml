@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   publish-docker-image:
-    if: ${{ github.event.issue.pull_request && ${{ github.event.comment.body }} == '/publish' }}
+    if: ${{ github.event.issue.pull_request && github.event.comment.body == '/publish' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Set up context
