@@ -1,4 +1,4 @@
-name: Publish PR
+name: PR Publish
 
 on:
   issue_comment:
