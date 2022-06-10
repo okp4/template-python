@@ -30,7 +30,7 @@ jobs:
           token: ${{ secrets.OKP4_TOKEN }}
 
       - name: Install environment
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
