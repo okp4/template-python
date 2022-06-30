@@ -51,7 +51,7 @@ This template provides the following:
 - [poetry](https://python-poetry.org) for dependency management.
 - [flake8](https://flake8.pycqa.org) for linting python code.
 - [mypy](http://mypy-lang.org/) for static type checks.
-- [unittest](https://docs.python.org) for unit testing.
+- [pytest](https://docs.pytest.org) for unit testing.
 
 The project is also configured to enforce code quality by declaring some CI workflows:
 
@@ -86,14 +86,34 @@ poetry run flake8 --count --show-source --statistics
 poetry run mypy .
 ```
 
+To improve code quality, we use other linters in our workflows, if you don't want to be rejected by the CI,
+please check these additional linters.
+
+**Markdown linting** is performed by [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli).
+
+```sh
+markdownlint "**/*.md"  
+```
+
+**Docker linting** is performed by [dockerfilelint](https://github.com/replicatedhq/dockerfilelint) and
+[hadolint](https://github.com/hadolint/hadolint).
+
+```sh
+dockerfilelint Dockerfile
+```
+
+```sh
+hadolint Dockerfile
+```
+
 ### Unit Test
 
 > ⚠️ Be sure to write tests that succeed or else you'll be rejected by the CI.
 
-Unit tests are performed by the [unittest](https://docs.python.org) testing framework.
+Unit tests are performed by the [pytest](https://docs.pytest.org) testing framework.
 
 ```sh
-poetry run python -m unittest discover
+poetry run pytest -v
 ```
 
 ### Build & run docker image (locally)
