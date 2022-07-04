@@ -19,7 +19,7 @@ This way, the template promotes:
 
 > 🚨 do not fork this repository as it is a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
 
-1. Click on [Use this template](https://github.com/rochacbruno/python-project-template/generate)
+1. Click on [Use this template](https://github.com/okp4/template-python/generate)
 2. Give a name to your project
 3. Wait until the first run of CI finishes
 4. Clone your new project and happy coding!
