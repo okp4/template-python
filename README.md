@@ -2,7 +2,12 @@
 
 > Template for Python Projects [@okp4](okp4.com).
 
-[![conventional commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![version](https://img.shields.io/github/v/release/okp4/template-python?style=for-the-badge&logo=github)](https://github.com/okp4/template-python/releases)
+[![lint](https://img.shields.io/github/workflow/status/okp4/template-python/Lint?label=lint&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/lint.yml)
+[![build](https://img.shields.io/github/workflow/status/okp4/template-python/Build?label=build&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/build.yml)
+[![test](https://img.shields.io/github/workflow/status/okp4/template-python/Test?label=test&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/test.yml)
+[![conventional commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=for-the-badge&logo=conventionalcommits)](https://conventionalcommits.org)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg?style=for-the-badge)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Purpose & Philosophy
 
@@ -92,7 +97,7 @@ please check these additional linters.
 **Markdown linting** is performed by [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli).
 
 ```sh
-markdownlint "**/*.md"  
+markdownlint "**/*.md"
 ```
 
 **Docker linting** is performed by [dockerfilelint](https://github.com/replicatedhq/dockerfilelint) and
