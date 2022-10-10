@@ -138,8 +138,9 @@ Once built, you can run the container locally with the following command line:
 docker run -ti --rm my-app
 ```
 
-## Contributing
+## You want to get involved? 😍
 
-So you want to contribute? Great. We appreciate any help you're willing to give. Don't hesitate to open issues and/or submit pull requests.
+Please check out OKP4 health files :
 
-Remember that this is the template we use at [OKP4](okp4.com/), and that we apply everywhere in our private and public Python projects. This is why we may have to refuse change requests simply because they do not comply with our internal requirements, and not because they are not relevant.
+- [Contributing](https://github.com/okp4/.github/blob/main/CONTRIBUTING.md)
+- [Code of conduct](https://github.com/okp4/.github/blob/main/CODE_OF_CONDUCT.md)
