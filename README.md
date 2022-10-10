@@ -59,6 +59,7 @@ This template provides the following:
 - [flake8](https://flake8.pycqa.org) for linting python code.
 - [mypy](http://mypy-lang.org/) for static type checks.
 - [pytest](https://docs.pytest.org) for unit testing.
+- [click](https://palletsprojects.com/p/click/) to easily setup your project commands
 
 The project is also configured to enforce code quality by declaring some CI workflows:
 
