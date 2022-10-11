@@ -103,12 +103,7 @@ please check these additional linters.
 markdownlint "**/*.md"
 ```
 
-**Docker linting** is performed by [dockerfilelint](https://github.com/replicatedhq/dockerfilelint) and
-[hadolint](https://github.com/hadolint/hadolint).
-
-```sh
-dockerfilelint Dockerfile
-```
+**Docker linting** is performed [hadolint](https://github.com/hadolint/hadolint).
 
 ```sh
 hadolint Dockerfile
