@@ -13,12 +13,12 @@
 
 ## Purpose & Philosophy
 
-This repository holds the template for building python projects with a consistent set of standards accross all okp4 python projects. We are convinced that the quality of the code depends on clear and consistent coding conventions, with an automated enforcement (CI).
+This repository holds the template for building python projects with a consistent set of standards across all okp4 python projects. We are convinced that the quality of the code depends on clear and consistent coding conventions, with an automated enforcement (CI).
 
 This way, the template promotes:
 
 - the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versionning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.)
-- a uniform way for managing the project lifecycle (depencencies management, building, testing)
+- a uniform way for managing the project lifecycle (dependencies management, building, testing)
 - KISS principles: simple for developers
 - a consistent coding style
 
@@ -76,6 +76,33 @@ Project is built by [poetry](https://python-poetry.org).
 
 ```sh
 poetry install
+```
+
+### Usage
+
+```sh
+poetry run my-app --help
+```
+
+Will give something like
+
+```console
+Usage: my-app [OPTIONS] COMMAND [ARGS]...
+
+  OKP4 python template, program description.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  main-cmd  Does something interesting...
+  version   Print the application version information
+```
+
+Example:
+
+```sh
+poetry run my-app main-cmd --name Sunshine
 ```
 
 ### Lint
