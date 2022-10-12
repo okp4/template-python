@@ -13,12 +13,12 @@
 
 ## Purpose & Philosophy
 
-This repository holds the template for building python projects with a consistent set of standards accross all okp4 python projects. We are convinced that the quality of the code depends on clear and consistent coding conventions, with an automated enforcement (CI).
+This repository holds the template for building python projects with a consistent set of standards across all okp4 python projects. We are convinced that the quality of the code depends on clear and consistent coding conventions, with an automated enforcement (CI).
 
 This way, the template promotes:
 
 - the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versionning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.)
-- a uniform way for managing the project lifecycle (depencencies management, building, testing)
+- a uniform way for managing the project lifecycle (dependencies management, building, testing)
 - KISS principles: simple for developers
 - a consistent coding style
 
@@ -59,6 +59,7 @@ This template provides the following:
 - [flake8](https://flake8.pycqa.org) for linting python code.
 - [mypy](http://mypy-lang.org/) for static type checks.
 - [pytest](https://docs.pytest.org) for unit testing.
+- [click](https://palletsprojects.com/p/click/) to easily setup your project commands
 
 The project is also configured to enforce code quality by declaring some CI workflows:
 
@@ -75,6 +76,33 @@ Project is built by [poetry](https://python-poetry.org).
 
 ```sh
 poetry install
+```
+
+### Usage
+
+```sh
+poetry run my-app --help
+```
+
+Will give something like
+
+```console
+Usage: my-app [OPTIONS] COMMAND [ARGS]...
+
+  OKP4 python template, program description.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  main-cmd  Does something interesting...
+  version   Print the application version information
+```
+
+Example:
+
+```sh
+poetry run my-app main-cmd --name Sunshine
 ```
 
 ### Lint
@@ -102,12 +130,7 @@ please check these additional linters.
 markdownlint "**/*.md"
 ```
 
-**Docker linting** is performed by [dockerfilelint](https://github.com/replicatedhq/dockerfilelint) and
-[hadolint](https://github.com/hadolint/hadolint).
-
-```sh
-dockerfilelint Dockerfile
-```
+**Docker linting** is performed [hadolint](https://github.com/hadolint/hadolint).
 
 ```sh
 hadolint Dockerfile
@@ -137,8 +160,9 @@ Once built, you can run the container locally with the following command line:
 docker run -ti --rm my-app
 ```
 
-## Contributing
+## You want to get involved? 😍
 
-So you want to contribute? Great. We appreciate any help you're willing to give. Don't hesitate to open issues and/or submit pull requests.
+Please check out OKP4 health files :
 
-Remember that this is the template we use at [OKP4](okp4.com/), and that we apply everywhere in our private and public Python projects. This is why we may have to refuse change requests simply because they do not comply with our internal requirements, and not because they are not relevant.
+- [Contributing](https://github.com/okp4/.github/blob/main/CONTRIBUTING.md)
+- [Code of conduct](https://github.com/okp4/.github/blob/main/CODE_OF_CONDUCT.md)

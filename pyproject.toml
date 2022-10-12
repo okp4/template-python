@@ -7,6 +7,7 @@ license = "BSD 3-Clause License"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+click = "^8.1.3"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^5.0.4"
@@ -26,7 +27,7 @@ upload_to_release = true
 build_command = "pip install poetry && poetry build"
 
 [tool.poetry.scripts]
-my-app = "my_app.main:main"
+my-app = "my_app.main:cli"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
