@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build-python:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -38,7 +38,7 @@ jobs:
           poetry build
 
   build-docker:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
