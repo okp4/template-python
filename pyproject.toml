@@ -18,7 +18,7 @@ pytest-cov = "^3.0.0"
 
 [tool.semantic_release]
 version_variable = [
-    "my_app/__init__.py:__version__",
+    "src/my_app/__init__.py:__version__",
     "pyproject.toml:version"
 ]
 branch = "main"
