@@ -70,7 +70,7 @@ jobs:
           poetry run flake8 --count --show-source --statistics
 
       - name: Lint python code (mypy)
-        uses: jpetrucciani/mypy-check@0.971
+        uses: jpetrucciani/mypy-check@0.991
         with:
           path: "."
 
