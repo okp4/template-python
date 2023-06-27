@@ -23,7 +23,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN  apt-get update \
   && apt-get install --no-install-recommends -y \
     build-essential=12.6 \
-    curl=7.64.0-4+deb10u3 \
+    curl=7.64.0-4+deb10u6 \
   && curl -sSL https://install.python-poetry.org | python3 \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get clean -y  \
