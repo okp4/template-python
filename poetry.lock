@@ -139,18 +139,18 @@ pyflakes = ">=3.0.0,<3.1.0"
 
 [[package]]
 name = "flake8-bugbear"
-version = "23.3.12"
+version = "23.6.5"
 description = "A plugin for flake8 finding likely bugs and design problems in your program. Contains warnings that don't belong in pyflakes and pycodestyle."
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8.1"
 files = [
-    {file = "flake8-bugbear-23.3.12.tar.gz", hash = "sha256:e3e7f74c8a49ad3794a7183353026dabd68c74030d5f46571f84c1fb0eb79363"},
-    {file = "flake8_bugbear-23.3.12-py3-none-any.whl", hash = "sha256:beb5c7efcd7ccc2039ef66a77bb8db925e7be3531ff1cb4d0b7030d0e2113d72"},
+    {file = "flake8-bugbear-23.6.5.tar.gz", hash = "sha256:8631e1071c9d85d24a615f235565c16c9a2ac57add4a14636d331bf9f4ef14fa"},
+    {file = "flake8_bugbear-23.6.5-py3-none-any.whl", hash = "sha256:1d9eae6d262a3823765f4579cdab169963d1d2288b02f0f5c6e829b03dded509"},
 ]
 
 [package.dependencies]
 attrs = ">=19.2.0"
-flake8 = ">=3.0.0"
+flake8 = ">=6.0.0"
 
 [package.extras]
 dev = ["coverage", "hypothesis", "hypothesmith (>=0.2)", "pre-commit", "pytest", "tox"]
@@ -364,4 +364,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "3eb441e1640b6255a484993f3b6eb4fedfdafbf345c37b1553c959f2bdd127e2"
+content-hash = "85abf5dcff38d2740b9d904fcf5fcde1bcb07634790402c2883b323f51c3c741"
