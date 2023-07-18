@@ -70,9 +70,8 @@ jobs:
           poetry run flake8 --count --show-source --statistics
 
       - name: Lint python code (mypy)
-        uses: jpetrucciani/mypy-check@0.971
-        with:
-          path: "."
+        run: |
+          poetry run mypy .
 
   lint-dockerfile:
     runs-on: ubuntu-22.04

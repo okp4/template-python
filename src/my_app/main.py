@@ -1,22 +1,19 @@
 import click
 
-import my_app.__init__ as init
+from my_app import __init__ as init
 from my_app.hello_world import say_hi
 
 
-@click.group()
-def cli():
-    """OKP4 python template, program description."""
-    pass
+cli = click.Group()
 
 
-@cli.command
-def version():
+@cli.command("version")
+def print_version():
     """Print the application version information"""
     click.echo(init.__version__)
 
 
-@cli.command
+@cli.command("main_cmd")
 @click.option(
     "-n",
     "--name",
