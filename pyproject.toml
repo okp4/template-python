@@ -12,7 +12,7 @@ click = "^8.1.7"
 [tool.poetry.dev-dependencies]
 flake8 = "^6.1.0"
 flake8-bugbear = "^23.9.16"
-mypy = "^1.5"
+mypy = "^1.6"
 pytest = "^7.4.2"
 pytest-cov = "^4.1.0"
 
