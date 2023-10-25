@@ -5,11 +5,19 @@ updates:
     schedule:
       interval: "daily"
     reviewers:
-      - "maintainers"
+      - amimart
+      - ccamel
+    assignees:
+      - amimart
+      - ccamel
 
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "daily"
     reviewers:
-      - "maintainers"
+      - amimart
+      - ccamel
+    assignees:
+      - amimart
+      - ccamel
