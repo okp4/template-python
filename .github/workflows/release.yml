@@ -44,7 +44,7 @@ jobs:
           python-version: 3.9
 
       - name: Release project
-        uses: cycjimmy/semantic-release-action@v3
+        uses: cycjimmy/semantic-release-action@v4
         with:
           semantic_version: 18.0.0
           branch: main
