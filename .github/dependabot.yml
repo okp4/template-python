@@ -10,7 +10,6 @@ updates:
     assignees:
       - amimart
       - ccamel
-
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
