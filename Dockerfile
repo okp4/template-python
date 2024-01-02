@@ -1,5 +1,5 @@
 # -----
-FROM python:3.9-slim-buster AS builder
+FROM python:3.9.18-slim-bullseye AS builder
 
 ENV \
     # python:
@@ -22,8 +22,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN  apt-get update \
   && apt-get install --no-install-recommends -y \
-    build-essential=12.6 \
-    curl=7.64.0-4+deb10u7 \
+    build-essential=12.9 \
+    curl=7.74.0-1.3+deb11u11 \
   && curl -sSL https://install.python-poetry.org | python3 \
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && apt-get clean -y  \
@@ -42,7 +42,7 @@ COPY src src
 RUN poetry build
 
 # -----
-FROM python:3.9.7-slim-buster
+FROM python:3.9.18-slim-bullseye
 
 LABEL org.opencontainers.image.source=https://github.com/okp4/template-python
 
