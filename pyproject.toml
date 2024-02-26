@@ -13,7 +13,7 @@ click = "^8.1.7"
 flake8 = "^7.0.0"
 flake8-bugbear = "^24.2.6"
 mypy = "^1.8"
-pytest = "^8.0.1"
+pytest = "^8.0.2"
 pytest-cov = "^4.1.0"
 
 [tool.semantic_release]
